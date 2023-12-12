@@ -37,7 +37,7 @@ password: minio_password
 10. Just play with the API.
 
 
-# Migrations
+## Migrations
 
 If you want to make changes to the database, changing or adding new models, you must import the model file into the `alembic/env.py` file and run the following commands:
 
@@ -48,15 +48,15 @@ make run-migrations
 ```
 
 
-# Testing
+## Testing
 
 Testing is done using [pytest](https://docs.pytest.org/en/stable/). The test cases are located in the `test` folder.
 
-## Test Details
+### Test Details
 
 The made tests are for the endpoints and test their correct functionality.
 
-## Running Tests
+### Running Tests
 
 To run the tests, follow these steps:
 
