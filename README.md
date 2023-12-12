@@ -33,6 +33,18 @@ password: minio_password
 7. Create a .env file following the structure like the .env.example file and paste the access key and the secret key.
 8. kill the docker-compose process and run again the docker-compose up command given in the step 2.
 9. Open a browser and navigate to http://localhost:8080/docs to access the API documentation.
+10. Just play with the API.
+
+
+# Migrations
+
+If you want to make changes to the database, changing or adding new models, you must import the model file into the `alembic/env.py` file and run the following commands:
+
+```bash
+docker-compose exec backend bash
+make make-migrations NAME="your migration name"
+make run-migrations
+```
 
 
 # Testing
@@ -58,7 +70,7 @@ To run the tests, follow these steps:
     ```bash
     pytest  
     or
-    make test
+    make run-test
     ```
 
 

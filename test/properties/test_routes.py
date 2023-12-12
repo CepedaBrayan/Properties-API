@@ -1,5 +1,7 @@
 from test.setup import client
-from unittest import TestCase
+from unittest import TestCase, mock
+
+from src.properties.models import PropertyImage
 
 prefix = "/api/v1/properties"
 
@@ -24,6 +26,14 @@ class TestPropertiesRoutes(TestCase):
             "owner_id": owner.json()["id"],
         },
     )
+    property_image = PropertyImage(
+        file_url="https://www.google.com",
+        property_id=property.json()["id"],
+    )
+
+    @staticmethod
+    def get_property_image(db, property_id, file):
+        return TestPropertiesRoutes.property_image
 
     def test_create_property(self):
         self.property = client.post(
@@ -45,3 +55,15 @@ class TestPropertiesRoutes(TestCase):
             json={"price": 2000},
         )
         self.assertEqual(_r.status_code, 200)
+
+    # mock.patch is used to mock the add_property_image function for avoiding
+    # the actual upload of the image to the cloud storage.
+    @mock.patch("src.properties.routes.add_property_image", get_property_image)
+    def test_add_image(self):
+        _r = client.post(
+            f"{prefix}/{self.property.json()['id']}/add_image",
+            files={"file": open("test/properties/images/jarvis.jpg", "rb")},
+        )
+        print(_r.json(), "<<<")
+        self.assertEqual(_r.status_code, 201)
+        self.assertEqual(_r.json()["file_url"], self.property_image.file_url)
