@@ -6,7 +6,8 @@ This project is developed using [FastAPI](https://fastapi.tiangolo.com/), Minio,
 
 ### Architecture
 
-The choice of tools and technologies for this project is driven by specific requirements. FastAPI is chosen for its efficiency in creating REST APIs quickly. PostgreSQL, a relational database, is selected to establish relationships between properties and owners. Minio is used to store images of properties. Docker is used to containerize the application and its dependencies. SQLAlchemy is used as the ORM to interact with the database. Alembic is used to manage database migrations.
+The choice of tools and technologies for this project is driven by specific requirements. FastAPI is chosen for its efficiency in creating REST APIs quickly. PostgreSQL, a relational database, is selected to establish relationships between properties and owners. Docker is used to containerize the application and its dependencies. SQLAlchemy is used as the ORM to interact with the database. Alembic is used to manage database migrations. Minio is used to store images of properties (Simulating some serverless bucket - saving the file, returning the url and saving this url in the database).
+
 
 ## Getting Started
 
